@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AppButton } from '../design-system/AppButton';
 import { Card } from '../ui/card';
 import { TrendingUp, Users, Leaf, DollarSign, Zap, ArrowUpIcon, ArrowDownIcon, Trophy, Target, Award, Star } from 'lucide-react';
+import { BackgroundFX } from '../fx/BackgroundFX';
 
 interface ImpactScreenProps {
   onJoinForFree: () => void;
@@ -93,6 +94,7 @@ export function ImpactScreen({ onJoinForFree }: ImpactScreenProps) {
 
   return (
     <div className="min-h-screen bg-white">
+      <BackgroundFX variant="hybrid" intensity="low" interactive />
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-green-50 via-white to-amber-50 py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">

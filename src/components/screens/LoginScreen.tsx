@@ -3,7 +3,8 @@ import { AppButton } from '../design-system/AppButton';
 import { AppInput } from '../design-system/AppInput';
 import { Card } from '../ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
-import { Zap, Mail, Lock, Info } from 'lucide-react';
+import { EnergyLinkLogo } from '../branding/Logo';
+import { Mail, Lock, Info } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 
 interface LoginScreenProps {
@@ -40,24 +41,12 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
     onLoginSuccess('buyer'); // Different role for demo button
   };
 
-  const EnergyLinkLogo = () => (
-    <div className="flex items-center justify-center space-x-3 mb-8">
-      <div className="w-12 h-12 rounded-2xl flex items-center justify-center"
-           style={{ 
-             background: 'linear-gradient(135deg, var(--accent-energy-1), var(--accent-energy-2))',
-             boxShadow: 'var(--glow-teal)'
-           }}>
-        <Zap className="w-7 h-7 icon-energy-white" strokeWidth={1.5} />
-      </div>
-      <span className="text-3xl font-semibold text-energy-gradient">EnergyLink</span>
-    </div>
-  );
 
   return (
     <div className="min-h-screen content-clean flex items-center justify-center py-8 hero-energy-glow">
       <div className="w-full max-w-md px-4">
         <div className="text-center mb-8">
-          <EnergyLinkLogo />
+          <EnergyLinkLogo size="lg" color="gradient" className="justify-center" />
           <h1 className="text-2xl md:text-3xl font-semibold mb-2" 
               style={{ color: 'var(--txt-heading)' }}>Log in</h1>
           <p style={{ color: 'var(--txt-primary)' }}>Access your energy trading dashboard</p>
@@ -65,11 +54,7 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
 
         <div className="dashboard-block space-y-6">
           {/* Demo Notice */}
-          <div className="p-4 rounded-lg" 
-               style={{ 
-                 backgroundColor: 'rgba(46, 242, 255, 0.1)',
-                 border: '1px solid rgba(46, 242, 255, 0.3)'
-               }}>
+          <div className="demo-notice">
             <div className="flex items-start space-x-3">
               <Info className="w-5 h-5 icon-energy-cyan flex-shrink-0 mt-0.5" />
               <div>
@@ -122,7 +107,7 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
               size="lg"
               onClick={handleLogin}
               disabled={isLoading}
-              className="w-full"
+              className="btn-enhanced w-full"
               icon={isLoading ? undefined : <Zap className="w-5 h-5" />}
             >
               {isLoading ? 'Signing in...' : 'Log in'}
@@ -132,7 +117,7 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
               variant="secondary"
               size="lg"
               onClick={handleDemoLogin}
-              className="w-full"
+              className="btn-enhanced w-full"
             >
               Continue as demo
             </AppButton>

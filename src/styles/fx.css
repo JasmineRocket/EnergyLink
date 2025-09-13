@@ -1,0 +1,338 @@
+/* Background FX System - High-tech Energy Visual Effects */
+
+/* Keyframes */
+@keyframes auroraShift {
+  0% { transform: translate3d(-2%, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(2%, 0, 0) rotate(1deg); }
+  100% { transform: translate3d(-2%, 0, 0) rotate(0deg); }
+}
+
+@keyframes beamSweep {
+  0% { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+@keyframes floatSlow {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes orbitRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-10px) translateX(5px); }
+  50% { transform: translateY(-5px) translateX(-3px); }
+  75% { transform: translateY(-15px) translateX(2px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+@keyframes particlePulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Utility Classes */
+.fx-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fx-aurora {
+  filter: blur(60px) saturate(120%);
+  opacity: 0.65;
+  animation: auroraShift 20s ease-in-out infinite;
+}
+
+.fx-aurora:nth-child(2) {
+  animation-duration: 25s;
+  animation-delay: -5s;
+}
+
+.fx-aurora:nth-child(3) {
+  animation-duration: 18s;
+  animation-delay: -10s;
+}
+
+.fx-orbits svg {
+  opacity: 0.25;
+  animation: orbitRotate 60s linear infinite;
+}
+
+.fx-orbits svg:nth-child(2) {
+  animation-duration: 80s;
+  animation-direction: reverse;
+}
+
+.fx-orbits svg:nth-child(3) {
+  animation-duration: 100s;
+  animation-delay: -20s;
+}
+
+.fx-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--scrim-strong) 0%,
+    transparent 30%,
+    var(--scrim-soft) 70%,
+    var(--scrim-strong) 100%
+  );
+  pointer-events: none;
+}
+
+.fx-gradient-beam {
+  position: absolute;
+  inset: -20%;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    rgba(46, 242, 255, 0.08) 0%,
+    transparent 20%,
+    rgba(0, 245, 212, 0.08) 40%,
+    transparent 60%,
+    rgba(125, 249, 255, 0.08) 80%,
+    transparent 100%
+  );
+  animation: beamSweep 20s linear infinite;
+  mix-blend-mode: screen;
+}
+
+.fx-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--energy-cyan), transparent);
+  animation: particleFloat 8s ease-in-out infinite, particlePulse 3s ease-in-out infinite;
+}
+
+.fx-particle:nth-child(odd) {
+  background: radial-gradient(circle, var(--energy-teal), transparent);
+  animation-delay: -2s;
+}
+
+.fx-particle:nth-child(3n) {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+  animation-delay: -4s;
+}
+
+/* Reduced Motion Support */
+html:has([data-reduce-motion="true"]) .fx-aurora,
+html:has([data-reduce-motion="true"]) .fx-gradient-beam,
+html:has([data-reduce-motion="true"]) .fx-orbits,
+html:has([data-reduce-motion="true"]) .fx-particle {
+  animation: none !important;
+}
+
+/* Performance optimizations */
+.fx-layer * {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .fx-aurora,
+  .fx-gradient-beam,
+  .fx-orbits,
+  .fx-particle {
+    opacity: 0.3;
+  }
+}
+
+/* Dark mode specific adjustments */
+.dark .fx-aurora {
+  opacity: 0.7;
+}
+
+.dark .fx-orbits svg {
+  opacity: 0.3;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .fx-aurora {
+    filter: blur(40px) saturate(100%);
+    opacity: 0.5;
+  }
+  
+  .fx-gradient-beam {
+    inset: -10%;
+  }
+  
+  .fx-particle {
+    animation-duration: 6s;
+  }
+}
+
+/* Low-end device optimizations */
+@media (prefers-reduced-data: reduce) {
+  .fx-aurora,
+  .fx-gradient-beam,
+  .fx-orbits,
+  .fx-particle {
+    display: none;
+  }
+}
+
+/* Energy Grid specific styles */
+.fx-energy-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.fx-energy-grid canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Logo component styles */
+.energy-link-logo {
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.energy-link-logo:hover {
+  transform: scale(1.02);
+}
+
+.energy-link-logo .logo-icon {
+  transition: all 0.2s ease-in-out;
+}
+
+.energy-link-logo:hover .logo-icon {
+  filter: drop-shadow(0 0 8px rgba(0, 245, 212, 0.6));
+}
+
+/* Auto-Match Status Live Chart */
+.auto-match-live {
+  position: relative;
+  overflow: hidden;
+}
+
+.auto-match-live::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(0, 245, 212, 0.02) 25%,
+    transparent 50%,
+    rgba(46, 242, 255, 0.02) 75%,
+    transparent 100%
+  );
+  animation: shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+.live-indicator {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* HomeFX specific keyframes */
+@keyframes auroraDrift {
+  0% { transform: translate3d(-2%, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(2%, 0, 0) rotate(1deg); }
+  100% { transform: translate3d(-2%, 0, 0) rotate(0deg); }
+}
+
+@keyframes beamSweep {
+  0% { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+@keyframes floatSlow {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* HomeFX utilities */
+.fx-home-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fx-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.45) 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.25) 70%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+/* Demo notice styling */
+.demo-notice {
+  background: rgba(18, 24, 32, 0.5);
+  border: none;
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+/* Enhanced input styling for dark theme */
+.input-enhanced {
+  @apply dark:text-white dark:placeholder:text-gray-400;
+  border-color: rgba(0, 245, 212, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.input-enhanced:focus {
+  border-color: var(--accent-energy-1);
+  box-shadow: 0 0 0 3px rgba(0, 245, 212, 0.2);
+  outline: none;
+}
+
+.input-enhanced:focus-visible {
+  ring: 3px;
+  ring-color: rgba(0, 245, 212, 0.3);
+}
+
+/* Button enhancements */
+.btn-enhanced {
+  min-width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .btn-enhanced {
+    min-width: 200px;
+  }
+}

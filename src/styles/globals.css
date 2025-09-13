@@ -124,6 +124,22 @@
   --gold: #ffd700;
   --silver: #c0c0c0;
   --bronze: #cd7f32;
+  
+  /* Background FX Energy Tokens */
+  --energy-cyan: #2EF2FF;
+  --energy-teal: #00F5D4;
+  --energy-indigo: #1E3A8A;
+  --bg-deep-1: #0B0F14;
+  --bg-deep-2: #121820;
+  --scrim-strong: rgba(0,0,0,0.45);
+  --scrim-soft: rgba(0,0,0,0.25);
+  
+  /* Logo Tokens */
+  --logo-size-desktop: 140px;
+  --logo-size-mobile: 120px;
+  --logo-color: #FFFFFF;
+  --logo-icon-size: 28px;
+  --logo-text-size: 2rem;
 }
 
 @theme inline {

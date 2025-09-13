@@ -3,6 +3,8 @@ import { KBarChart } from '../stock/KBarChart';
 import { KpiStat } from '../stock/KpiStat';
 import { LiveTransactionsList } from '../stock/LiveTransactionsList';
 import { TradePanel } from '../stock/TradePanel';
+import { BackgroundFX } from '../fx/BackgroundFX';
+import { AutoMatchStatusLive } from '../auto-match/AutoMatchStatusLive';
 
 interface DashboardScreenProps {
   role: 'seller' | 'buyer';
@@ -107,6 +109,7 @@ export function DashboardScreen({ role, className = '' }: DashboardScreenProps) 
 
   return (
     <div className={`min-h-screen content-clean p-6 ${className}`}>
+      <BackgroundFX variant="hybrid" intensity="md" interactive />
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Page header */}
         <div className="mb-8">
@@ -120,16 +123,7 @@ export function DashboardScreen({ role, className = '' }: DashboardScreenProps) 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Chart - Takes 2/3 to 3/4 width */}
           <div className="lg:col-span-3">
-            <KBarChart
-              title="Auto-Match Status"
-              timeframe={chartTimeframe}
-              onTimeframeChange={setChartTimeframe}
-              currentPrice="$0.149"
-              priceChange="+$0.008"
-              priceChangePercent="+5.7%"
-              variant={chartVariant}
-              className="h-full"
-            />
+            <AutoMatchStatusLive range={chartTimeframe === '24H' ? '24h' : chartTimeframe === '7D' ? '7d' : '30d'} />
           </div>
 
           {/* Account Status - Takes 1/3 to 1/4 width */}

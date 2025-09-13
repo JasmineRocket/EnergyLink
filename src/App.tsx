@@ -18,7 +18,7 @@ import { StyleGuideScreen } from './components/screens/StyleGuideScreen';
 import { MainNavigation } from './components/layout/MainNavigation';
 import { TopNavigation } from './components/layout/TopNavigation';
 
-type Screen = 'home' | 'how-it-works' | 'impact' | 'community' | 'login' | 'signup' | 'verification' | 'priceband' | 'dashboard' | 'receipt' | 'settings' | 'components' | 'style-guide';
+type Screen = 'home' | 'how-it-works' | 'impact' | 'community' | 'login' | 'signup' | 'verification' | 'priceband' | 'dashboard' | 'receipt' | 'settings' | 'components';
 type Role = 'seller' | 'buyer' | null;
 
 export default function App() {
@@ -70,7 +70,7 @@ export default function App() {
     navigate('receipt');
   };
 
-  const showMainNav = !['login', 'verification', 'priceband'].includes(currentScreen) && !isLoggedIn;
+  const showMainNav = !['verification', 'priceband'].includes(currentScreen) && !isLoggedIn;
   const showTopNav = ['dashboard', 'receipt', 'settings', 'community', 'components'].includes(currentScreen) && isLoggedIn;
   const showAuthSection = !['dashboard', 'receipt', 'settings', 'community'].includes(currentScreen);
 
@@ -157,9 +157,6 @@ export default function App() {
       
       case 'components':
         return <ComponentsScreen />;
-      
-      case 'style-guide':
-        return <StyleGuideScreen />;
       
       default:
         return <HomeScreen onJoinForFree={handleJoinForFree} />;

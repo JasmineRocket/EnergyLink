@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AppButton } from '../design-system/AppButton';
-import { Menu, X, Zap } from 'lucide-react';
+import { EnergyLinkLogo } from '../branding/Logo';
+import { Menu, X } from 'lucide-react';
 
 interface MainNavigationProps {
   currentScreen: string;
@@ -15,19 +16,10 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
     { id: 'home', label: 'Home' },
     { id: 'how-it-works', label: 'How It Works' },
     { id: 'impact', label: 'Impact' },
-    { id: 'style-guide', label: 'Style Guide' },
   ];
 
 
 
-  const EnergyLinkLogo = () => (
-    <div className="flex items-center space-x-3">
-      <div className="flex items-center space-x-1">
-        <Zap className="w-7 h-7 icon-energy-teal" strokeWidth={1.5} />
-      </div>
-      <span className="text-2xl font-semibold text-energy-gradient">EnergyLink</span>
-    </div>
-  );
 
   return (
     <>
@@ -36,7 +28,7 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <button onClick={() => onNavigate('home')} className="flex items-center">
-            <EnergyLinkLogo />
+            <EnergyLinkLogo size="md" color="default" />
           </button>
 
           {/* Center Navigation */}
@@ -62,13 +54,7 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
 
           {/* Right Section */}
           {showAuthSection && (
-            <div className="flex items-center space-x-4">
-              <AppButton
-                variant="tertiary"
-                onClick={() => onNavigate('login')}
-              >
-                Log in
-              </AppButton>
+            <div className="flex items-center">
               <AppButton
                 variant="primary"
                 onClick={() => onNavigate('signup')}
@@ -85,10 +71,7 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
         <div className="flex items-center justify-between">
           {/* Logo */}
           <button onClick={() => onNavigate('home')} className="flex items-center">
-            <div className="flex items-center space-x-2">
-              <Zap className="w-6 h-6 icon-energy-teal" strokeWidth={1.5} />
-              <span className="text-xl font-semibold text-energy-gradient">EnergyLink</span>
-            </div>
+            <EnergyLinkLogo size="sm" color="default" />
           </button>
 
           {/* Mobile Menu Button */}
@@ -119,17 +102,7 @@ export function MainNavigation({ currentScreen, onNavigate, showAuthSection = tr
               ))}
               
               {showAuthSection && (
-                <div className="border-t pt-3 space-y-2" style={{ borderColor: 'rgba(0, 245, 212, 0.2)' }}>
-                  <AppButton
-                    variant="tertiary"
-                    onClick={() => {
-                      onNavigate('login');
-                      setShowMobileMenu(false);
-                    }}
-                    className="w-full"
-                  >
-                    Log in
-                  </AppButton>
+                <div className="border-t pt-3" style={{ borderColor: 'rgba(0, 245, 212, 0.2)' }}>
                   <AppButton
                     variant="primary"
                     onClick={() => {

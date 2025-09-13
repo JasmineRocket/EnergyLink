@@ -2,6 +2,7 @@ import React from 'react';
 import { AppButton } from '../design-system/AppButton';
 import { Card } from '../ui/card';
 import { Home, Zap, Users, DollarSign, Leaf, MapPin, CheckCircle, ArrowRight } from 'lucide-react';
+import { HomeFX } from '../fx/HomeFX';
 
 interface HomeScreenProps {
   onJoinForFree: () => void;
@@ -37,6 +38,7 @@ export function HomeScreen({ onJoinForFree }: HomeScreenProps) {
 
   return (
     <div className="min-h-screen content-clean">
+      <HomeFX intensity="md" interactive scrim />
       {/* Hero Section */}
       <div className="relative overflow-hidden hero-energy-glow">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">

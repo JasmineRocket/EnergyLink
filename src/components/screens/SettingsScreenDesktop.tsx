@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppButton } from '../design-system/AppButton';
 import { AppInput } from '../design-system/AppInput';
 import { Card } from '../ui/card';
@@ -22,9 +22,22 @@ export function SettingsScreenDesktop({ isDarkMode = false, onThemeToggle }: Set
   const [privacyMode, setPrivacyMode] = useState(true);
   const [monthlyBudget, setMonthlyBudget] = useState([150]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(() => {
+    return document.documentElement.getAttribute('data-reduce-motion') === 'true';
+  });
 
   const currentSpend = 87;
   const budgetPercent = (currentSpend / monthlyBudget[0]) * 100;
+
+  // Initialize motion preference from localStorage
+  useEffect(() => {
+    const savedMotionPreference = localStorage.getItem('reduce-motion');
+    if (savedMotionPreference !== null) {
+      const isReduced = savedMotionPreference === 'true';
+      setReduceMotion(isReduced);
+      document.documentElement.setAttribute('data-reduce-motion', isReduced.toString());
+    }
+  }, []);
 
   const handleDownloadStatement = (month: string) => {
     toast.success(`${month} statement downloaded`);
@@ -41,6 +54,13 @@ export function SettingsScreenDesktop({ isDarkMode = false, onThemeToggle }: Set
   const handleDeleteComplete = () => {
     // Navigate back to home screen (this would be handled by parent component)
     window.location.href = '/';
+  };
+
+  const handleMotionToggle = (enabled: boolean) => {
+    setReduceMotion(enabled);
+    document.documentElement.setAttribute('data-reduce-motion', enabled.toString());
+    // Save to localStorage for persistence
+    localStorage.setItem('reduce-motion', enabled.toString());
   };
 
   const monthlyStatements = [
@@ -123,6 +143,18 @@ export function SettingsScreenDesktop({ isDarkMode = false, onThemeToggle }: Set
                             type="toggle"
                             checked={notifications}
                             onChange={setNotifications}
+                          />
+                        </div>
+
+                        <div className="flex items-center justify-between p-4 rounded-lg dashboard-block">
+                          <div>
+                            <p className="font-medium" style={{ color: 'var(--txt-heading)' }}>Reduce motion</p>
+                            <p className="text-sm" style={{ color: 'var(--txt-primary)' }}>Disable background animations and effects</p>
+                          </div>
+                          <AppInput
+                            type="toggle"
+                            checked={reduceMotion}
+                            onChange={handleMotionToggle}
                           />
                         </div>
                       </div>

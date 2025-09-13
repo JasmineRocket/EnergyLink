@@ -7,6 +7,7 @@ import { ActivityItem } from '../stock/ActivityItem';
 import { AchievementCard } from '../stock/AchievementCard';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { MapPin } from 'lucide-react';
+import { BackgroundFX } from '../fx/BackgroundFX';
 
 interface CommunityScreenNewProps {
   className?: string;
@@ -166,6 +167,7 @@ export function CommunityScreenNew({ className = '' }: CommunityScreenNewProps) 
 
   return (
     <div className={`min-h-screen content-clean p-6 ${className}`}>
+      <BackgroundFX variant="orbits" intensity="low" interactive />
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Page header */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
